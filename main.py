@@ -9,8 +9,6 @@ from sklearn.decomposition import PCA, TruncatedSVD
 import matplotlib.patches as mpatches
 import time
 
-from mySqlConn import df2table, table2df
-
 #Classifier Libraries
 from sklearn.linear_model import LogisticRegression
 from sklearn.svm import SVC
@@ -23,7 +21,7 @@ from sklearn.model_selection import ShuffleSplit, learning_curve
 import collections
 
 #My modules
-from myModule import underSample, corrHeatmapVis
+from md import underSample, corrHeatmapVis
 
 #Other Libraries
 from sklearn.model_selection import train_test_split
@@ -41,17 +39,11 @@ warnings.filterwarnings('ignore')
 # from dataprep.eda import plot, create_report
 
 # %%
-file = r'data\creditcard.csv'
+file = r'creditcard.csv'
 df = pd.read_csv(file)
 print(f"shape df: {df.shape}")
 df.head()
 
-df2table(df, 'root', '949700', 'creditdb', 'creditcardTBL')
-
-# df = table2df('root', '949700', 'creditdb', 'creditcardtbl')
-
-# report = create_report(df)
-# report.save('creditcard_summary.html')
 #%%
 ## imbalanced data set check()
 nonFraudsRate = np.round((len(df[df.Class==0]) / len(df.Class) * 100), 2)
